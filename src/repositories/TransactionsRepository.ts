@@ -28,10 +28,15 @@ class TransactionsRepository {
       (accumulator: Balance, transaction: Transaction) => {
         const balance = accumulator;
 
-        if (transaction.type === 'income') {
-          balance.income += transaction.value;
-        } else if (transaction.type === 'outcome') {
-          balance.outcome += transaction.value;
+        switch (transaction.type) {
+          case 'income':
+            balance.income += transaction.value;
+            break;
+          case 'outcome':
+            balance.outcome += transaction.value;
+            break;
+          default:
+            break;
         }
 
         return balance;
